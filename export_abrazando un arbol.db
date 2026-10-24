@@ -1,0 +1,38 @@
+BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS beneficiario (id_beneficiario INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT NOT NULL, direccion TEXT, telefono TEXT,
+id_planta TEXT REFERENCES planta(id_planta));
+CREATE TABLE IF NOT EXISTS institucion (id_institucion INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT NOT NULL, direccion TEXT, telefono TEXT,
+id_beneficiario INTEGER,FOREIGN KEY (id_beneficiario) REFERENCES beneficiario(id_beneficiario));
+CREATE TABLE IF NOT EXISTS planta (id_planta INTEGER PRIMARY KEY AUTOINCREMENT, especie TEXT NOT NULL, altura TEXT, raiz TEXT,
+id_institucion TEXT, FOREIGN KEY (id_institucion) REFERENCES institucion(id_institucion));
+INSERT INTO "beneficiario" ("id_beneficiario","nombre","direccion","telefono","id_planta") VALUES (112,'Cesar Armando Rodriguez','saguaro 131','4492121243','19'),
+ (123,'Andrea Toyama De Leon','saguaro #135','4498034961','12'),
+ (221,'Alejandra Castañeda De La Cruz','cubaya #101','4497563568','20'),
+ (321,'jose Angel Serrano Mares','pithaya #221','4493905983','16'),
+ (332,'Martin caballero Capuchino','fresno #221','4499809496','21'),
+ (443,'Griselda Macias Herrera','garambullo #156','4493561305','22'),
+ (456,'Mario Hernandez Salcido','cubaya #102','4498105974','14'),
+ (654,'Marisol De Leon Vargas','pithaya #210','4494281620','17'),
+ (789,'Claudia Hernandez Aguilar','pithaya #210','4496058544','15'),
+ (987,'Erika Ortega Valencia','grenovia #103','4491564019','18');
+INSERT INTO "institucion" ("id_institucion","nombre","direccion","telefono","id_beneficiario") VALUES (15,'vivero municipal','jardines del parque','449723010',987),
+ (16,'vivero municipal','jardines del parque','4499723010',321),
+ (22,'vivero la palma','splidaridad 1','44992739258',123),
+ (24,'vivero la palma','splidaridad 1','44992739258',654),
+ (29,'vivero la palma','splidaridad 1','44992739258',332),
+ (35,'vivero estatal','ortega douglas','4491020976',443),
+ (73,'vivero estatal','ortega douglas','4491020976',789),
+ (74,'vivero municipal','jardines del parque','4499723010',456),
+ (92,'vivero estatal','ortega douglas','4491020976',221),
+ (99,'vivero municipal','jardines del parque','4499723010',112);
+INSERT INTO "planta" ("id_planta","especie","altura","raiz","id_institucion") VALUES (12,'trueno','3 a 10 metros','pivotante','16'),
+ (14,'tronadora','1 a 8 metros','pivotante','22'),
+ (15,'guayabo','5 a 6 metros','pivotante','29'),
+ (16,'tronadora','1 a 8 metros','pivotante','35'),
+ (17,'trueno','3 a 10 metros','pivotante','46'),
+ (18,'trueno','3 a 10 metros','pivotante','55'),
+ (19,'lluvia de oro','40 a 50cm','pivotante','64'),
+ (20,'tronadora','1 a 8 metros','pivotante','72'),
+ (21,'fresno','15 a 20 metros','pivotante','82'),
+ (22,'tronadora','1 a 8 metros','pivotante','92');
+COMMIT;
